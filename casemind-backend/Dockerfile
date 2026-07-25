@@ -5,6 +5,32 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
+# Install system deps needed for build/cryptography
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy dependency manifest and install
+COPY casemind-backend/requirements.txt ./requirements.txt
+RUN python -m pip install --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy application source
+COPY casemind-backend/ /app/
+
+EXPOSE 8000
+
+# Start the application
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
 # Install system deps required for some Python packages (adjust as needed)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \

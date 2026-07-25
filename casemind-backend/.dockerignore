@@ -1,0 +1,11 @@
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.local
+uploads
+node_modules
+casemind-app/.next
+.git

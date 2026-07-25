@@ -16,6 +16,31 @@ This document describes recommended deployment steps for the CaseMind project.
 
    - `NEXT_PUBLIC_API_URL` — e.g. `https://api.your-domain.com/api` or the deployed backend URL
 
+   ## Backend — Deploy `casemind-backend` to Render (Docker)
+
+   This repository contains a `casemind-backend/Dockerfile` and a `render.yaml` to make Render deployments straightforward.
+
+   Quick steps to deploy on Render:
+
+   1. Sign in to Render and create a new **Web Service**.
+   2. Connect your GitHub repo `HimanshuIITP/Casemind` and choose the `main` branch.
+   3. In the service settings choose **Docker** and ensure the path points to `casemind-backend/Dockerfile` (the included `render.yaml` will also help if you use Render's GitHub App).
+   4. Add the required environment variables in the Render dashboard (set them as **Secrets**):
+
+      - `MONGODB_URL` — MongoDB connection string
+      - `DATABASE_NAME` — database name
+      - `JWT_SECRET` — secret for signing JWTs
+      - `JWT_ALGORITHM` — typically `HS256`
+      - `ACCESS_TOKEN_EXPIRE_MINUTES` — token lifetime in minutes
+      - `MISTRAL_API_KEY` — API key for Mistral (if using AI features)
+
+   5. Deploy. Render will build the Docker image and run the service. The service URL will be available in the Render dashboard.
+
+   Notes:
+   - Use `render.yaml` to codify the service if you want to create or update the service via the Render web UI or the Render CLI.
+   - For production, configure health checks and resource sizing in the Render service settings.
+
+
 5. Deploy. Vercel will build and serve the Next.js app.
 
 Notes:

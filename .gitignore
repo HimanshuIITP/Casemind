@@ -1,0 +1,8 @@
+node_modules
+.next
+__pycache__/
+*.py[cod]
+.env
+casemind-backend/.env
+casemind-backend/uploads/
+original-*.mp4

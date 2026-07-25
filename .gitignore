@@ -6,3 +6,5 @@ __pycache__/
 casemind-backend/.env
 casemind-backend/uploads/
 original-*.mp4
+!casemind-app/.env.example
+!casemind-backend/.env.example

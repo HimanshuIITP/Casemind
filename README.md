@@ -246,7 +246,7 @@ flowchart TD
   F --> B[FastAPI Backend]
   B --> DB[(MongoDB)]
   B --> AI[AI Layer]
-  AI --> HF[Hugging Face / Model Provider]
+  AI --> HF[Mistral AI / Model Provider]
   B --> AUTH[JWT Authentication]
   B --> N[Notifications Service]
   AUTH --> DB
@@ -288,7 +288,7 @@ flowchart TD
 
 | Technology | Purpose |
 |---|---|
-| Hugging Face | Model hosting / inference provider target |
+| Mistral AI | Model hosting / inference provider target |
 | Prompt Builder | Converts case context into structured AI inputs |
 | Structured JSON | Makes responses machine-readable for the UI |
 
@@ -404,9 +404,9 @@ The App Router gives the frontend server components, nested layouts, route group
 
 The backend is intentionally organized as a modular monolith. That keeps the system understandable for a hackathon MVP while preserving clear boundaries for future extraction.
 
-### Hugging Face
+### Mistral AI
 
-Hugging Face is a practical AI hosting and inference target for a judicial product because it supports model portability, structured prompts, and future provider flexibility.
+Mistral AI is the primary model provider target for CaseMind. It provides high-quality language models suitable for instruction-following, structured prompts, and low-latency inference. CaseMind integrates directly with Mistral's inference API for model generation and chat workloads.
 
 ---
 
@@ -496,8 +496,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | Yes | Access token lifetime in minutes |
 | `MONGODB_URI` | Yes | MongoDB connection string for backend services |
 | `DATABASE_NAME` | Yes | Database name used for all collections |
-| `HF_API_KEY` | Optional | Hugging Face API key for AI inference |
-| `HF_MODEL` | Optional | Hugging Face model identifier used by the AI layer |
+| `MISTRAL_API_KEY` | Optional | Mistral API key for AI inference |
+| `MISTRAL_MODEL` | Optional | Mistral model identifier used by the AI layer |
 | `FRONTEND_URL` | Recommended | Frontend origin for CORS / redirects in production |
 | `BACKEND_PORT` | Optional | Runtime port used by the backend service |
 
@@ -649,7 +649,7 @@ flowchart TD
   A[Citizen / Lawyer / Court] --> B[FastAPI Request]
   B --> C[MongoDB Case Context]
   C --> D[Prompt Builder]
-  D --> E[Hugging Face Model / Provider]
+  D --> E[Mistral Model / Provider]
   E --> F[Structured JSON Output]
   F --> G[Frontend UI]
 ```

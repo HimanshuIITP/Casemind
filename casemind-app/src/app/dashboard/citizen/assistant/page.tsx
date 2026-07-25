@@ -82,7 +82,7 @@ export default function AssistantPage() {
           </div>
           <div>
             <h1 className="font-bold text-[#111111]">CaseMind Legal AI</h1>
-            <p className="text-xs text-gray-500 font-medium">Powered by Hugging Face</p>
+            <p className="text-xs text-gray-500 font-medium">Powered by Mistral AI</p>
           </div>
         </div>
       </div>
